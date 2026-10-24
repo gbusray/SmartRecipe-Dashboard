@@ -1,0 +1,71 @@
+<!-- Rationale: A11y compliant semantic nav. Added 'dark:' variants for a seamless transition to the dark slate theme. -->
+<nav class="h-screen w-64 bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-100 flex flex-col border-r border-gray-100 dark:border-slate-800 shadow-sm transition-colors duration-300" aria-label="Main Navigation">
+  
+  <!-- Brand Header -->
+  <div class="px-6 py-8 border-b border-gray-50 dark:border-slate-800 transition-colors duration-300">
+    <h1 class="text-2xl font-bold tracking-wide text-gray-900 dark:text-white">
+      Smart<span class="text-aiPurple-500">Recipe</span>
+    </h1>
+    <p class="text-[11px] text-gray-400 dark:text-slate-400 mt-1 uppercase tracking-wider font-semibold">AI Dietary Assistant</p>
+  </div>
+
+  <!-- Navigation Links -->
+  <ul class="flex-1 px-4 py-6 space-y-2">
+    @for (item of menuItems(); track item.id) {
+      <li>
+        <button 
+          (click)="navigateTo(item.id)"
+          [attr.aria-current]="activeRouteId() === item.id ? 'page' : null"
+          [class.bg-freshGreen-50]="activeRouteId() === item.id && !isDarkMode()"
+          [class.dark:bg-freshGreen-500/10]="activeRouteId() === item.id"
+          [class.text-freshGreen-500]="activeRouteId() === item.id && !isDarkMode()"
+          [class.dark:text-freshGreen-400]="activeRouteId() === item.id"
+          [class.text-gray-500]="activeRouteId() !== item.id && !isDarkMode()"
+          [class.dark:text-slate-400]="activeRouteId() !== item.id"
+          [class.hover:bg-gray-50]="activeRouteId() !== item.id && !isDarkMode()"
+          [class.dark:hover:bg-slate-800]="activeRouteId() !== item.id"
+          class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-left focus:outline-none focus:ring-2 focus:ring-aiPurple-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900">
+          
+          <div class="w-2 h-2 rounded-full transition-colors" 
+               [class.bg-aiPurple-500]="activeRouteId() === item.id"
+               [class.bg-gray-300]="activeRouteId() !== item.id && !isDarkMode()"
+               [class.dark:bg-slate-600]="activeRouteId() !== item.id">
+          </div>
+          
+          <span class="font-medium text-[15px]">{{ item.label }}</span>
+        </button>
+      </li>
+    }
+  </ul>
+
+  <!-- Bottom Section: Profile & Theme Toggle -->
+  <div class="p-4 border-t border-gray-50 dark:border-slate-800 flex items-center justify-between transition-colors duration-300">
+    <!-- User Profile -->
+    <div class="flex items-center gap-3 px-2 py-2 rounded-xl">
+      <div class="w-9 h-9 rounded-full bg-freshGreen-50 dark:bg-freshGreen-500/10 flex items-center justify-center text-sm font-bold text-freshGreen-500 dark:text-freshGreen-400">
+        GB
+      </div>
+      <div class="flex-1 overflow-hidden">
+        <p class="text-[13px] font-semibold text-gray-800 dark:text-gray-200 truncate">Gevher Büşra</p>
+        <p class="text-[11px] text-aiPurple-500 dark:text-aiPurple-400 font-medium truncate">Gluten-Free</p>
+      </div>
+    </div>
+
+    <!-- Theme Toggle Button -->
+    <button 
+      (click)="toggleTheme()"
+      class="p-2 rounded-lg text-gray-400 hover:text-aiPurple-500 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-aiPurple-500"
+      aria-label="Toggle Dark Mode">
+      <!-- Rationale: Conditional rendering for Sun/Moon SVG icons based on current theme state. -->
+      @if (isDarkMode()) {
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+        </svg>
+      } @else {
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+        </svg>
+      }
+    </button>
+  </div>
+</nav>
