@@ -1,0 +1,221 @@
+.chat-input {
+  width: 100%;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 4px;
+  background: linear-gradient(to top, #f8fafc, #f8fafc 80%, transparent);
+  box-sizing: border-box;
+
+  &__drag-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    background: rgba(34, 197, 94, 0.1); 
+    backdrop-filter: blur(4px);
+    border: 2px dashed #A855F7; 
+    border-radius: 1.5rem 1.5rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      font-size: clamp(14px, 1.5vh, 18px);
+      font-weight: 700;
+      color: #1e293b;
+    }
+  }
+
+  &__staging-area {
+    width: 100%;
+    max-width: 48rem;
+    margin-bottom: 2px;
+    padding-left: 4px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__staged-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  &__staged-image {
+    height: 48px;
+    width: 48px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    border: 1px solid #A855F7;
+  }
+
+  &__discard-btn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #1e293b;
+    color: white;
+    border-radius: 9999px;
+    padding: 2px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    
+    &:hover { background: #ef4444; }
+  }
+
+  &__form {
+    width: 100%;
+    max-width: 48rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 2rem;
+    padding: 4px;
+    display: flex;
+    align-items: center; 
+    gap: 4px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+
+    &:focus-within {
+      outline: 2px solid #A855F7;
+      border-color: transparent;
+    }
+  }
+
+  &__attachment-btn {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    padding: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    background: transparent;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    
+    &:hover {
+      color: #A855F7;
+      background: #f1f5f9;
+    }
+
+    svg { width: 24px; height: 24px; }
+  }
+
+ &__textarea-wrapper {
+    flex: 1;
+    display: grid;
+    padding: 4px 0;
+    
+    @media (max-height: 450px) {
+      max-height: 40px; 
+    }
+    
+    @media (min-height: 451px) and (max-width: 639px) {
+      max-height: 56px;
+    }
+    
+    @media (min-width: 640px) and (min-height: 451px) {
+      max-height: clamp(56px, 35vh, 240px);
+    }
+    
+    overflow-y: auto;
+
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 9999px;
+    }
+
+    &::after {
+      content: attr(data-replicated-value) " ";
+      white-space: pre-wrap;
+      visibility: hidden;
+      grid-area: 1 / 1 / 2 / 2;
+      font-size: 16px;
+      word-break: break-word;
+      line-height: 1.5;
+    }
+  }
+
+  &__textarea {
+    grid-area: 1 / 1 / 2 / 2;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #1e293b;
+    font-family: inherit;
+    word-break: break-word;
+    line-height: 1.5;
+    font-size: 16px;
+    overflow: hidden;
+
+    &::placeholder { color: #94a3b8; }
+  }
+
+  &__submit-btn {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    padding: 0; 
+    background: #A855F7;
+    color: white;
+    border-radius: 9999px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    
+    &:hover { background: #9333ea; }
+
+    svg {
+      width: 20px; 
+      height: 20px;
+      margin-right: 2px;
+      margin-top: 1px;
+    }
+  }
+
+  &__disclaimer {
+    margin: 0;
+    font-size: 11px;
+    color: #94a3b8;
+    user-select: none;
+    text-align: center;
+
+    /*  Hides on narrow or short screens to protect vertical */
+    @media (max-width: 640px), (max-height: 600px) {
+      display: none;
+    }
+  }
+}
+
+:host-context(.dark) {
+  .chat-input {
+    background: linear-gradient(to top, #020617, #020617 80%, transparent);
+
+    &__form {
+      background: #0f172a;
+      border-color: #334155;
+    }
+    &__textarea { color: #f1f5f9; }
+    &__attachment-btn:hover { background: #1e293b; }
+    &__drag-overlay h2 { color: #f1f5f9; }
+  }
+}

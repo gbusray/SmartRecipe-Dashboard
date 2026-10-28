@@ -1,43 +1,45 @@
 import { Component, signal, WritableSignal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-// Rationale: Defining a strict interface for navigation items ensures type safety and centralizes menu configuration (DRY).
-interface MenuItem {
-  id: string;
-  label: string;
-  icon: string;
-  route: string;
-}
+import { Router, RouterModule } from '@angular/router'; 
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css'
+  styleUrl: './sidebar.scss'
 })
 export class Sidebar implements OnInit {
-  public menuItems: WritableSignal<MenuItem[]> = signal([
-    { id: 'chat', label: 'Smart Assistant', icon: 'sparkles', route: '/chat' },
-    { id: 'dashboard', label: 'Dietary Dashboard', icon: 'user', route: '/dashboard' },
-    { id: 'ai-engine', label: 'AI Engine Settings', icon: 'cpu', route: '/ai-engine' }
+  // Controls the accordion state of the Smart Assistant menu.
+  public isChatExpanded: WritableSignal<boolean> = signal(true);
+  
+  // Manages the off-canvas drawer visibility on mobile viewports.
+  public isMobileMenuOpen: WritableSignal<boolean> = signal(false);
+
+  // Mocks initial history payload; to be replaced by backend integration.
+  public chatHistory = signal([
+    { id: 'chat-1', title: 'Gluten-Free Pancakes...' },
+    { id: 'chat-2', title: 'Almond Milk Matcha...' },
+    { id: 'chat-3', title: 'Swedish Meatballs...' }
   ]);
 
-  public activeRouteId: WritableSignal<string> = signal('chat');
-  
-  // Rationale: Local state management for the theme toggle using Signals.
+  // Syncs internal theme state with the DOM documentElement.
   public isDarkMode: WritableSignal<boolean> = signal(false);
 
+  //  Injecting the Angular Router service.
+  constructor(private router: Router) {}
+
   public ngOnInit(): void {
-    // Rationale: Checking initial system preference or localStorage can be added here later.
+    // Check initial theme state on load
     this.isDarkMode.set(document.documentElement.classList.contains('dark'));
   }
 
-  public navigateTo(id: string): void {
-    this.activeRouteId.set(id);
+  // Toggles the Smart Assistant menu open/closed.
+  public toggleChatMenu(): void {
+    this.isChatExpanded.update(val => !val);
   }
 
-  // Rationale: Direct DOM manipulation on the root element to apply Tailwind's 'dark:' variant classes globally.
+  // Theme toggle logic for perfect UX.
   public toggleTheme(): void {
     this.isDarkMode.update(current => !current);
     if (this.isDarkMode()) {
@@ -45,5 +47,15 @@ export class Sidebar implements OnInit {
     } else {
       document.documentElement.classList.remove('dark');
     }
+  }
+
+  // Toggles the mobile drawer visibility.
+  public toggleMobileMenu(): void {
+    this.isMobileMenuOpen.update(val => !val);
+  }
+
+  // Closes the drawer when a navigation link is clicked or the backdrop is tapped.
+  public closeMobileMenu(): void {
+    this.isMobileMenuOpen.set(false);
   }
 }

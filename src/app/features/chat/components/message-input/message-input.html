@@ -1,0 +1,63 @@
+<div class="chat-input" 
+     (dragover)="onDragOver($event)" 
+     (dragleave)="onDragLeave($event)" 
+     (drop)="onDrop($event)">
+  
+  @if (isDragging()) {
+    <div class="chat-input__drag-overlay">
+      <h2>Drop food image here! 🌿</h2>
+    </div>
+  }
+
+  @if (stagedImage()) {
+    <div class="chat-input__staging-area">
+      <div class="chat-input__staged-wrapper">
+        <img [src]="stagedImage()" class="chat-input__staged-image" alt="Staged upload preview">
+        <button 
+          (click)="discardStagedImage()" 
+          class="chat-input__discard-btn"
+          aria-label="Discard selected image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  }
+
+  <div class="chat-input__form">
+    <input type="file" hidden #fileInput (change)="onFileSelected($event)" accept="image/*" aria-label="Hidden file input">
+    
+    <button 
+      (click)="fileInput.click()" 
+      class="chat-input__attachment-btn"
+      aria-label="Upload image attachment">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+      </svg>
+    </button>
+
+    <div class="chat-input__textarea-wrapper" [attr.data-replicated-value]="inputText() + ' '">
+      <textarea 
+        #promptTextarea
+        (input)="onInput($event)"
+        (keydown)="handleKeydown($event)"
+        class="chat-input__textarea" 
+        placeholder="Ask for a recipe or drop an image..."
+        rows="1"
+        aria-label="Message input field"></textarea>
+    </div>
+
+    <button 
+      (click)="submitMessage()" 
+      class="chat-input__submit-btn"
+      aria-label="Send message">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    </button>
+  </div>
+
+  <p class="chat-input__disclaimer">SmartRecipe can make mistakes. Verify dietary allergens.</p>
+</div>

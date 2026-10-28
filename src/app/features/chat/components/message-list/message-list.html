@@ -1,0 +1,38 @@
+<div #scrollContainer class="h-full overflow-y-auto p-6 space-y-6">
+  @for (msg of messages; track $index) {
+    <div class="flex w-full" [class.justify-end]="msg.sender === 'user'" [class.justify-start]="msg.sender === 'ai'">
+      <div 
+        class="max-w-[85%] sm:max-w-[70%] px-5 py-4 rounded-2xl shadow-sm leading-relaxed text-[15px] flex flex-col gap-3 transition-all"
+        [class.bg-aiPurple-500]="msg.sender === 'user'"
+        [class.text-white]="msg.sender === 'user'"
+        [class.rounded-br-sm]="msg.sender === 'user'"
+        [class.bg-white]="msg.sender === 'ai'"
+        [class.dark:bg-slate-900]="msg.sender === 'ai'"
+        [class.text-slate-800]="msg.sender === 'ai'"
+        [class.dark:text-slate-200]="msg.sender === 'ai'"
+        [class.border]="msg.sender === 'ai'"
+        [class.border-slate-200]="msg.sender === 'ai'"
+        [class.dark:border-slate-800]="msg.sender === 'ai'"
+        [class.rounded-bl-sm]="msg.sender === 'ai'">
+        
+        @if (msg.imageUrl) {
+          <img [src]="msg.imageUrl" alt="Uploaded food" class="rounded-xl max-h-64 object-cover shadow-sm border border-black/10 dark:border-white/10" />
+        }
+        
+        @if (msg.text) {
+          <span [innerHTML]="msg.text | markdown"></span>
+        }
+      </div>
+    </div>
+  }
+ 
+  @if (isTyping) {
+    <div class="flex w-full justify-start">
+      <div class="px-5 py-4 rounded-2xl rounded-bl-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center h-[52px]">
+        <div class="typing-indicator">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  }
+</div>

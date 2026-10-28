@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-// Rationale: Importing our standalone Sidebar component to inject it into the root application layout.
 import { Sidebar } from './shared/components/sidebar/sidebar';
 
 @Component({
@@ -11,5 +10,4 @@ import { Sidebar } from './shared/components/sidebar/sidebar';
   styleUrl: './app.css'
 })
 export class App {
-  title = 'smart-recipe-dashboard';
 }
