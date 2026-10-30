@@ -20,7 +20,7 @@
 <aside class="sidebar" [class.sidebar--open]="isMobileMenuOpen()">
   <div class="sidebar__header">
     <h1 class="sidebar__logo">Smart<span>Recipe</span></h1>
-    <span class="sidebar__subtitle">AI DIETARY ASSISTANT</span>
+    <span class="sidebar__subtitle">{{ 'SIDEBAR.SUBTITLE' | translate }}</span>
   </div>
 
   <nav class="sidebar__nav">
@@ -28,7 +28,7 @@
       <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
       </svg>
-      Dietary Dashboard
+      {{ 'SIDEBAR.DASHBOARD' | translate }}
     </a>
 
     <div class="sidebar__accordion-group">
@@ -36,7 +36,7 @@
         <svg class="sidebar__icon text-freshGreen-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
         </svg>
-        <span class="sidebar__text">Smart Assistant</span>
+        <span class="sidebar__text">{{ 'SIDEBAR.SMART_ASSISTANT' | translate }}</span>
         <svg class="sidebar__chevron" [class.sidebar__chevron--rotated]="isChatExpanded()" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
@@ -48,11 +48,11 @@
             <svg class="sidebar__sub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
-            New Recipe Chat
+            {{ 'SIDEBAR.NEW_CHAT' | translate }}
           </a>
 
           <div class="sidebar__history-list">
-            <span class="sidebar__history-label">Recent</span>
+            <span class="sidebar__history-label">{{ 'SIDEBAR.RECENT' | translate }}</span>
             @for (chat of chatHistory(); track chat.id) {
               <a [routerLink]="['/chat', chat.id]" (click)="closeMobileMenu()" routerLinkActive="sidebar__sub-link--active" class="sidebar__history-item">
                 <svg class="sidebar__sub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -68,15 +68,27 @@
   </nav>
 
   <div class="sidebar__footer">
-    <div class="sidebar__profile">
+    <!-- Clean profile avatar icon -->
+    <div class="sidebar__profile" [title]="'Gevher Büşra - ' + ('SIDEBAR.DIET_STATUS' | translate)" style="cursor: pointer;">
       <div class="sidebar__avatar">GB</div>
-      <div class="sidebar__user-info">
-        <span class="sidebar__user-name">Gevher Büşra</span>
-        <span class="sidebar__user-diet">Gluten-Free</span>
-      </div>
     </div>
     
     <div class="sidebar__footer-actions">
+      <!-- Fully interactive EN | TR language toggle -->
+      <div style="display: flex; align-items: center; gap: 8px; margin-right: 8px; font-size: 12px; font-weight: 800; color: #94a3b8;">
+        <span (click)="toggleLanguage('en')" 
+              [style.color]="currentLang() === 'en' ? '#A855F7' : '#94a3b8'" 
+              style="cursor: pointer; transition: color 0.2s;">
+          EN
+        </span>
+        <span style="opacity: 0.3; font-weight: 400;">|</span>
+        <span (click)="toggleLanguage('tr')" 
+              [style.color]="currentLang() === 'tr' ? '#A855F7' : '#94a3b8'" 
+              style="cursor: pointer; transition: color 0.2s;">
+          TR
+        </span>
+      </div>
+      
       <button (click)="toggleTheme()" class="sidebar__action-btn" aria-label="Toggle Theme">
         @if (isDarkMode()) {
           <svg class="sidebar__action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -90,7 +102,6 @@
       </button>
 
       <a routerLink="/ai-engine" (click)="closeMobileMenu()" routerLinkActive="sidebar__action-btn--active" class="sidebar__action-btn" aria-label="AI Engine Settings">
-        <!-- Rationale: Sleek Robot Icon for AI Engine Settings -->
         <svg class="sidebar__action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="11" width="18" height="10" rx="2"></rect>
           <circle cx="12" cy="5" r="2"></circle>

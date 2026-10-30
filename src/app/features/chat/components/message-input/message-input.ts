@@ -1,10 +1,11 @@
 import { Component, signal, WritableSignal, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-message-input',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './message-input.html',
   styleUrl: './message-input.scss'
 })

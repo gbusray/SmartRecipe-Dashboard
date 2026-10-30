@@ -4,17 +4,19 @@
   @if (messages().length === 0) {
     <div class="flex-1 flex flex-col items-center justify-center p-6 overflow-hidden">
       
-      <h2 class="text-2xl font-extrabold text-slate-800 dark:text-slate-100 mb-2">How can I help you today?</h2>
+      <h2 class="text-2xl font-extrabold text-slate-800 dark:text-slate-100 mb-2">
+        {{ 'CHAT.WELCOME_TITLE' | translate }}
+      </h2>
       <p class="text-slate-500 dark:text-slate-400 text-center max-w-md mb-8">
-        Upload a food photo or select a quick suggestion below to start generating safe, personalized recipes.
+        {{ 'CHAT.WELCOME_SUBTITLE' | translate }}
       </p>
       
       <div class="flex flex-wrap justify-center gap-3 max-w-2xl">
-        @for (suggestion of suggestions; track $index) {
+        @for (key of suggestionKeys; track $index) {
           <button 
-            (click)="sendSuggestion(suggestion)"
+            (click)="sendSuggestion(key)"
             class="px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300 hover:border-aiPurple-400 hover:text-aiPurple-500 transition-colors shadow-sm">
-            {{ suggestion }}
+            {{ key | translate }}
           </button>
         }
       </div>

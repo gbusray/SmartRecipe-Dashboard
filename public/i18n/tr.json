@@ -1,0 +1,30 @@
+{
+  "CHAT": {
+    "HEADER_TITLE": "Akıllı Tarif Asistanı",
+    "WELCOME_TITLE": "Bugün sana nasıl yardımcı olabilirim?",
+    "WELCOME_SUBTITLE": "Güvenli ve kişiselleştirilmiş tarifler üretmeye başlamak için bir yemek fotoğrafı yükleyin veya aşağıdan hızlı bir öneri seçin.",
+    "SUGGESTIONS": {
+      "BREAKFAST": "Glütensiz bir kahvaltı öner 🥞",
+      "APPLES": "Elma ile ne yapabilirim? 🍏",
+      "VEGAN_DINNER": "Yüksek proteinli vegan akşam yemeği 🌱"
+    },
+    "MOCK_AI_RESPONSE": "**Başarılı!** İsteğinize göre sizin için harika bir tarif. \n\n- Lezzetli \n- Glütensiz \n- Güvenli",
+    "INPUT_PLACEHOLDER": "Bir tarif isteyin veya fotoğraf bırakın...",
+    "DISCLAIMER": "SmartRecipe hata yapabilir. Diyet alerjenlerini doğrulayın.",
+    "DROP_IMAGE": "Yemek fotoğrafını buraya bırakın! 🥗",
+    "ARIA": {
+      "DISCARD_IMAGE": "Seçilen görseli kaldır",
+      "UPLOAD_IMAGE": "Görsel eki yükle",
+      "MESSAGE_INPUT": "Mesaj giriş alanı",
+      "SEND_MESSAGE": "Mesajı gönder"
+    }
+  },
+  "SIDEBAR": {
+    "SUBTITLE": "YAPAY ZEKA DİYET ASİSTANI",
+    "DASHBOARD": "Diyet Paneli",
+    "SMART_ASSISTANT": "Akıllı Asistan",
+    "NEW_CHAT": "Yeni Tarif Sohbeti",
+    "RECENT": "Son Kullanılanlar",
+    "DIET_STATUS": "Glütensiz"
+  }
+}

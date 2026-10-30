@@ -1,0 +1,30 @@
+{
+  "CHAT": {
+    "HEADER_TITLE": "SmartRecipe Assistant",
+    "WELCOME_TITLE": "How can I help you today?",
+    "WELCOME_SUBTITLE": "Upload a food photo or select a quick suggestion below to start generating safe, personalized recipes.",
+    "SUGGESTIONS": {
+      "BREAKFAST": "Suggest a gluten-free breakfast 🥞",
+      "APPLES": "What can I make with apples? 🍏",
+      "VEGAN_DINNER": "I need a high-protein vegan dinner 🌱"
+    },
+    "MOCK_AI_RESPONSE": "**Success!** Here is a fantastic recipe for you based on your request. \n\n- Delicious \n- Gluten-Free \n- Safe",
+    "INPUT_PLACEHOLDER": "Ask for a recipe or drop an image...",
+    "DISCLAIMER": "SmartRecipe can make mistakes. Verify dietary allergens.",
+    "DROP_IMAGE": "Drop food image here! 🥗",
+    "ARIA": {
+      "DISCARD_IMAGE": "Discard selected image",
+      "UPLOAD_IMAGE": "Upload image attachment",
+      "MESSAGE_INPUT": "Message input field",
+      "SEND_MESSAGE": "Send message"
+    }
+  },
+  "SIDEBAR": {
+    "SUBTITLE": "AI DIETARY ASSISTANT",
+    "DASHBOARD": "Dietary Dashboard",
+    "SMART_ASSISTANT": "Smart Assistant",
+    "NEW_CHAT": "New Recipe Chat",
+    "RECENT": "Recent",
+    "DIET_STATUS": "Gluten-Free"
+  }
+}
